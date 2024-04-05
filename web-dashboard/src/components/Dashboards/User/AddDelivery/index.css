@@ -1,0 +1,10 @@
+.add-delivery-container {
+    background-color: gray;
+}
+
+.add-delivery-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}

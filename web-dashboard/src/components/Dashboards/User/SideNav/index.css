@@ -1,0 +1,33 @@
+.user-side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 15vw;
+    padding: 2rem;
+}
+
+.user-side-nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.user-side-nav-heading {
+    color: rgb(117, 117, 117);
+}
+
+.user-side-nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size: large;
+    padding: 0.3rem 1rem;
+    background-color: rgb(231, 231, 231);
+    border-radius: 10px;
+}
+
+.add-delivery-request-link {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,19 @@
+.App {
+    position: relative;
+    min-height: 100dvh;
+}
+
+:root {
+    --color-white: rgb(255, 255, 255);
+    --color-black: rgb(0, 0, 0);
+    --color-background-1: rgb(250, 250, 250);
+    --color-background-2: rgb(241, 245, 249);
+    --color-background-3: rgb(218, 217, 217);
+    --color-primary: rgb(1, 148, 197);
+    --color-primary-variant: #24bef1;
+    --color-primary-danger: rgb(235, 79, 48);
+    --color-background-primary: rgb(69, 233, 255);
+    --color-grey-tone: rgb(100, 116, 139);
+
+    --transition: all 400ms ease;
+}
