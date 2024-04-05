@@ -13,7 +13,16 @@
 }
 
 .add-delivery-form {
-    width: 40%;
+    width: 60%;
+}
+
+.delivery-request-date {
+    width: 100%;
+}
+
+.delivery-request-date label {
+    color: gray;
+    margin-left: 5px;
 }
 
 .add-delivery-form input {
@@ -44,4 +53,28 @@
     outline: 0;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+
+.add-delivery-request-button {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.add-delivery-request-button:hover {
+    background-color: rgb(168, 168, 168);
+}
+
+.add-delivery-request-message {
+    margin: 0.5rem;
+    font-size: small;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }

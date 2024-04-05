@@ -13,6 +13,8 @@ app.use(cors())
 
 app.use('/api/user', require('./routes/userRoutes'))
 
+app.use('/api/delivery', require('./routes/deliveryRoutes'))
+
 app.use('/', (req, res) => {
     res.status(400).json({ message: "Page Not found" })
 })
