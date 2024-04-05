@@ -45,3 +45,12 @@
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
+
+.add-delivery-request-button {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.add-delivery-request-button:hover {
+    background-color: rgb(168, 168, 168);
+}
