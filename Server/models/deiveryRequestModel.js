@@ -18,8 +18,14 @@ const deliveryRequestSchema = mongoose.Schema({
     description: {
         type: String
     },
-    goodsType: {
-        type: String,
+    weight: {
+        type: String
+    },
+    height: {
+        type: String
+    },
+    width: {
+        type: String
     },
     image: {
         type: String,
