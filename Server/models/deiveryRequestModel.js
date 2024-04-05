@@ -32,6 +32,9 @@ const deliveryRequestSchema = mongoose.Schema({
     },
     date: {
         type: String
+    },
+    startingBiddingPrice: {
+        type: Number
     }
 }, {
     timestamps: true
