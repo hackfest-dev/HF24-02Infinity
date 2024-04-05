@@ -13,7 +13,7 @@
 }
 
 .add-delivery-form {
-    width: 40%;
+    width: 60%;
 }
 
 .add-delivery-form input {
@@ -53,4 +53,9 @@
 
 .add-delivery-request-button:hover {
     background-color: rgb(168, 168, 168);
+}
+
+.add-delivery-request-message {
+    margin: 0.5rem;
+    font-size: small;
 }
