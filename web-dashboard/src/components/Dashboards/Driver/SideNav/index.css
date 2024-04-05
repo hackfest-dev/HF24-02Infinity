@@ -1,0 +1,28 @@
+.admin-side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 15vw;
+    padding: 2rem;
+}
+
+.admin-side-nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-side-nav-heading {
+    color: rgb(117, 117, 117);
+}
+
+.admin-side-nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    font-size:medium;
+    padding: 0.3rem 1rem;
+    background-color: rgb(231, 231, 231);
+    border-radius: 10px;
+}
