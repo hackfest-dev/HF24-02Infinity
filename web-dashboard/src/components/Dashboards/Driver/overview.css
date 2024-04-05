@@ -1,0 +1,71 @@
+body{
+        font-family: "Poppins", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+}
+
+.overview-container{
+    width: 68vw;
+    background-color: rgba(232, 232, 232, 0.555);
+    /* border-right: 2px solid black;
+    border-left: 2px solid black; */
+}
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 30px;
+    padding: 30px;
+    width: 450px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #E3F5FF;
+    border-radius: 1rem;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+h3 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.overview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.charts{
+    margin: 20px;
+    background-color: #E3F5FF;
+    padding: 20px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    height: 50vh;
+    font-weight: 600;
+}
+
+.location-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;   
+}
+
+.locations , .driver-details{
+    border: 2px solid #dbdbdb;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+    width:550px;
+    height: 20vh;
+    font-weight: 600;
+}
