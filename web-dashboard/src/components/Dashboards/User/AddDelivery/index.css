@@ -16,6 +16,15 @@
     width: 60%;
 }
 
+.delivery-request-date {
+    width: 100%;
+}
+
+.delivery-request-date label {
+    color: gray;
+    margin-left: 5px;
+}
+
 .add-delivery-form input {
     display: inline-block;
     width: 100%;
