@@ -7,8 +7,8 @@ const DriverNav = () => {
   return (
     <>
       <div className='admin-top-nav'>
-        <p className='admin-top-nav-h1'><FaUser /> Admin</p>
-        <p className='admin-top-nav-h2'>Admin Dashboard</p>
+        <p className='admin-top-nav-h1'><FaUser /> Driver</p>
+        <p className='admin-top-nav-h2'>Driver Dashboard</p>
       </div>
     </>
   )
