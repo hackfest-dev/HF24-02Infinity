@@ -4,7 +4,11 @@ const DeliveryRequest = require("../models/deiveryRequestModel")
 
 const newRequest = asyncHandler(async (req, res) => {
 
+    const { weight, height, width, source, destination } = req.body
+
     try {
+
+        //Maps API Integration
 
         await DeliveryRequest.create(req.body)
 
