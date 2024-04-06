@@ -5,26 +5,25 @@ const User = require("../models/userModel")
 const fetch = require('node-fetch')
 
 const calculateDistanceByRoad = async (lat1, lon1, lat2, lon2) => {
-    
-    console.log(lat1, lon1, lat2, lon2)
-    
-    const apiKey = process.env.GOOGLE_MAPS_API_KEY
-    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=${apiKey}&mode=driving`
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=${apiKey}&mode=driving`;
 
     try {
-        const response = await fetch(url)
-        const data = await response.json()
+        const response = await fetch(url);
+        const data = await response.json();
         if (data.status === 'OK') {
-            const distanceText = data.rows[0].elements[0].distance.text
-            const distanceValue = parseFloat(distanceText.split(' ')[0])
-            return distanceValue
+            const distanceText = data.rows[0].elements[0].distance.text;
+            const distanceValue = parseFloat(distanceText.split(' ')[0]);
+            return distanceValue;
         } else {
-            throw new Error(data.error_message || 'Failed to fetch distance data')
+            console.error('Google Maps API error:', data.error_message || 'Failed to fetch distance data');
+            return null;
         }
     } catch (error) {
-        throw new Error('Error fetching distance data:', error.message)
+        console.error('Error fetching distance data:', error.message);
+        return null;
     }
-}
+};
 
 const calculatePrice = (weight, height, width, distanceInKm) => {
     // Base price per kilometer (in rupees)
@@ -53,13 +52,12 @@ const newRequest = asyncHandler(async (req, res) => {
         const sourceLon = source.split(',')[1]
         const destLat = destination.split(',')[0]
         const destLon = destination.split(',')[1]
-        // const distanceInKm = await calculateDistanceByRoad(sourceLat, sourceLon, destLat, destLon)
-        distanceInKm = 50
+        const distanceInKm = await calculateDistanceByRoad(sourceLat, sourceLon, destLat, destLon)
 
         if (distanceInKm !== null) {
             const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
-            await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice})
+            // await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice})
 
             return res.status(200).json({ message: 'Request submitted successfully', totalPrice, status: 200 })
         } else {
