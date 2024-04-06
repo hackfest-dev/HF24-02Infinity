@@ -56,7 +56,7 @@ const liveDeliverySchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    speed: {
+    avgSpeed: {
       type: Number,
     },
     currentLocation: {
