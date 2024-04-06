@@ -37,7 +37,6 @@ const AddDelivery = () => {
     )
 
     const data = await response.json()
-    console.log(data)
     if (data.status === 200) {
       setMessage(data.message + '...You will recieve notification, once approved...')
       setTimeout(() => {
@@ -58,14 +57,6 @@ const AddDelivery = () => {
       setMessage(data.message)
     }
   }
-
-  // const handleImageInput = (e) => {
-  //   const imageFile = e.target.files[0]
-  //   if (imageFile){
-  //     const imageURL = URL.createObjectURL(imageFile)
-  //     setDeliveryData({ ...deliveryData, image: imageURL })
-  //   }else imageFile = ''
-  // }
 
   const handleImageInput = (e) => {
     const imageFile = e.target.files[0]
