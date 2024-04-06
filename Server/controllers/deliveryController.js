@@ -53,10 +53,11 @@ const newRequest = asyncHandler(async (req, res) => {
         const sourceLon = source.split(',')[1]
         const destLat = destination.split(',')[0]
         const destLon = destination.split(',')[1]
-        const distanceInKm = await calculateDistanceByRoad(sourceLat, sourceLon, destLat, destLon)
+        // const distanceInKm = await calculateDistanceByRoad(sourceLat, sourceLon, destLat, destLon)
+        distanceInKm = 50
 
         if (distanceInKm !== null) {
-            const totalPrice = calculatePrice(int(weight), int(height), int(width), int(distanceInKm))
+            const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
             await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice})
 
@@ -81,7 +82,9 @@ const getCurrentBids = asyncHandler(async (req, res) => {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
-        
+        const bids = await DeliveryRequest.find({ bidEndDate: { $gt: currentDate } })
+
+        return res.status(200).json({ bids, status: 200 })
         
     } catch (err) {
         console.error(err)
