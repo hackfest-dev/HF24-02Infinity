@@ -13,7 +13,7 @@ const SideNav = () => {
         <div className='admin-side-nav-container'>
           <h4 className='admin-side-nav-heading'>Dashboards</h4>
           <p className='admin-side-nav-link'><GrOverview />Overview</p>
-          <p className='admin-side-nav-link'><IoIosAlert />Biddings</p>
+          <a href="#open-bidding-request" className='admin-side-nav-link'><p className='open-bidding-request'><IoIosAlert />Biddings</p></a>
           <p className='admin-side-nav-link'><FaLocationDot />Current Location</p>
         </div>
         <div className='admin-side-nav-container'>

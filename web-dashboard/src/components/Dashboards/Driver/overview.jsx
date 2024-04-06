@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './overview.css'
 
 import { LuRefreshCw } from "react-icons/lu"
-import GetPlaceName from './maps'
-import MapWithDirections from './DirectionMap'
+// import GetPlaceName from './maps'
+// import MapWithDirections from './DirectionMap'
 import MapComponent from './DirectionMap'
 
 const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
@@ -140,7 +140,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                     </div>
                 </div>
             </div>
-            <div className="charts2">
+            <div className="chart2">
                 <div><MapComponent/></div>
             </div>
             <div className="contents-driver">
