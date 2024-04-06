@@ -6,8 +6,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
     const [bids, setBids] = useState([])
 
     const [message, setMessage] = useState('')
-    const [isLowerBid, setIsLowerBid] = useState({ status: false })
-    const [lowerAmount, setLowerAmount] = useState({})
+    const [isLowerBid, setIsLowerBid] = useState({ status: false, id: '' })
+    const [selectedItem, setSelectedItem] = useState({ amount: 0, id: '' })
 
     const formatDateTime = (dateTime) => {
         const date = new Date(dateTime)
@@ -62,9 +62,12 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
         const data = await response.json()
 
         if (data.status === 200) {
-            setMessage('Successfully added to waitingList')
-            console.log(data)
-        }
+            setMessage(data.message)
+        } else setMessage(data.message)
+
+        setTimeout(() => {
+            setMessage('')
+        }, 3000);
     }
 
     const lowerBid = async () => {
@@ -78,8 +81,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 },
                 body: JSON.stringify({
                     userId: localStorage.getItem("userId"),
-                    deliveryId: lowerAmount.id,
-                    lowerAmount: lowerAmount.amount,
+                    deliveryId: selectedItem.id,
+                    lowerAmount: selectedItem.amount,
                 }),
             }
         )
@@ -87,9 +90,13 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
         const data = await response.json()
 
         if (data.status === 200) {
-            setMessage('Successfully lowered the bid')
+            setMessage(data.message)
             console.log(data)
-        }
+        }else setMessage(data.message)
+
+        setTimeout(() => {
+            setMessage('')
+        }, 3000);
     }
 
     return (
@@ -132,7 +139,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 {isLowerBid.status && <div className='lower-amount'>
                     <div>
                         <label htmlFor="lower-amount">Enter the lower amount: </label>
-                        <input type="number" required value={lowerAmount.amount} onChange={(e) => setLowerAmount({ id: isLowerBid.id, amount: e.target.value })} />
+                        <input type="number" required value={selectedItem.amount} onChange={(e) => setSelectedItem({ ...selectedItem, amount: e.target.value })} />
                     </div>
                     <div>
                         <button onClick={() => setIsLowerBid({ status: false })}>Cancel</button>
@@ -157,7 +164,9 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.currentBiddingPrice}</p>
                             <p>{formatDateTime(value.bidEndDate)}</p>
                             <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
-                            <button onClick={() => setIsLowerBid({ status: true, id: value._id })}>Lower bid</button>
+                            <button onClick={() => {
+                                setSelectedItem({ id: value._id, amount: 0 })
+                                setIsLowerBid({ status: true, id: value._id })}}>Lower bid</button>
                         </div>)
                     })}
                 </div>
@@ -166,7 +175,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
 
         </div>
-    );
+    )
 }
 
-export default Overview;
+export default Overview

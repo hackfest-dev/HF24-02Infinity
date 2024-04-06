@@ -57,7 +57,7 @@ const newRequest = asyncHandler(async (req, res) => {
         if (distanceInKm !== null) {
             const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
-            await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice})
+            await DeliveryRequest.create({ ...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice })
 
             return res.status(200).json({ message: 'Request submitted successfully', totalPrice, status: 200 })
         } else {
@@ -75,11 +75,11 @@ const getCurrentBids = asyncHandler(async (req, res) => {
         const { userId } = req.body
         const user = await User.findOne({ _id: userId })
 
-        if(user == undefined || user == null){
+        if (user == undefined || user == null) {
             return res.status(401).json({ message: 'Unauthorized', status: 401 })
         }
 
-        if(user.type === 'user'){
+        if (user.type === 'user') {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
@@ -87,7 +87,7 @@ const getCurrentBids = asyncHandler(async (req, res) => {
         const bids = await DeliveryRequest.find({ bidEndDate: { $gt: currentDate } })
 
         return res.status(200).json({ bids, status: 200 })
-        
+
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Internal server error', status: 500 })
@@ -101,15 +101,26 @@ const joinWaitList = asyncHandler(async (req, res) => {
 
         const driver = await User.findOne({ _id: userId })
 
-        if( !driver || driver.type !== 'driver' ){
+        if (!driver || driver.type !== 'driver') {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
         const currentDate = new Date()
-        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate } })
-
-        if( !bid ) {
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId })
+        console.log(bid)
+        if (bid === null || bid  === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
+        }
+        
+        var flag = false
+        bid.currentWaitList.map((value, key) => {
+            if (value.userId === userId) {
+                return flag = true
+            }
+        })
+
+        if(flag){
+            return res.status(200).json({ message: 'You are already present in waiting list', status: 200 })
         }
 
         bid.currentWaitList.push({
@@ -120,7 +131,7 @@ const joinWaitList = asyncHandler(async (req, res) => {
         console.log('UpdatedBid', updatedBid)
 
         return res.status(200).json({ message: 'Added to waiting list', status: 200 })
-        
+
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Internal server error', status: 500 })
@@ -134,14 +145,15 @@ const lowerBid = asyncHandler(async (req, res) => {
 
         const driver = await User.findOne({ _id: userId })
 
-        if( !driver || driver.type !== 'driver' ){
+        if (!driver || driver.type !== 'driver') {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
         const currentDate = new Date()
-        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate }, currentBiddingPrice: { $gt: lowerAmount } })
 
-        if( !bid ) {
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId })
+
+        if (bid === null || bid  === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
 
@@ -154,7 +166,7 @@ const lowerBid = asyncHandler(async (req, res) => {
         await bid.save()
 
         return res.status(200).json({ message: 'Lowered the bid successfully', status: 200 })
-        
+
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Internal server error', status: 500 })
