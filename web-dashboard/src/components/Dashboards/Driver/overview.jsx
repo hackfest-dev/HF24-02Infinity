@@ -139,15 +139,24 @@ const Overview = ({ basicData }) => {
                 </div>
             </div>
             <div className="chart2">
-                <MapComponent/>
+                <MapComponent />
             </div>
             <div className="contents-driver">
             </div>
             <div className="location-details">
                 <div className='driver-details'>
-                   <h4> Driver details</h4>
-                   <p>Email: {basicData.driver.email}</p>
-                   <p>Mobile Number: {basicData.driver.mobileNumber}</p>
+                    <h4> Customer details</h4>
+                    {basicData && basicData.customersList && basicData.customersList.map((value, key) => {
+                        if (key == 0)
+                            return (<div key={key}></div>)
+                        return (
+                            <div key={key}>
+                                <p>Customer {key}: </p>
+                                <p>Email: {value.email}</p>
+                                <p>Mobile: {value.mobileNumber}</p>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
             <div className='driver-bid-container'>
@@ -174,9 +183,10 @@ const Overview = ({ basicData }) => {
                             <p><h3>Final Destination</h3>{value.destination}</p>
                             <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
                             <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
+                            <img src={value.image} alt="" />
                             {value.currentWaitList.length >= 1 && value.currentWaitList[0].userId === userId ?
                                 <p>You are in the top of waiting list</p> :
-                                <button className="join-waiting-list"onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
+                                <button className="join-waiting-list" onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             }
                             <button className="button-lower-bid" onClick={() => {
                                 setSelectedItem({ id: value._id, amount: 0 })

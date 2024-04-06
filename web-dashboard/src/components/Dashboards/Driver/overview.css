@@ -70,6 +70,12 @@ p {
     font-weight: 600;
 }
 
+.driver-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 .driver-bid-container {
     background-color: #E3F5FF;
     padding: 2rem;

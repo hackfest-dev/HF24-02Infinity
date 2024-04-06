@@ -6,14 +6,12 @@ import { FaRegCircleUser } from "react-icons/fa6"
 
 const Notifications = ({ basicData }) => {
 
-  const [activeDrivers, setActiveDrivers] = useState([])
-
   const [notfs, setNotfs] = useState([])
 
   const getNotfs = async () => {
     if (localStorage.getItem("userId")) {
       const response = await fetch(
-        "http://localhost:5001/api/notification/getusernotification",
+        "http://localhost:5001/api/notification/getdrivernotification",
         {
           method: "POST",
           headers: {
@@ -30,6 +28,7 @@ const Notifications = ({ basicData }) => {
 
       if (data.status === 200) {
         setNotfs(data.notfs)
+        console.log(notfs)
       }
     }
   }
@@ -38,10 +37,6 @@ const Notifications = ({ basicData }) => {
     getNotfs()
   }, [])
 
-  useEffect(() => {
-    setActiveDrivers([{ drivername: 'Joseph', link: 'joseph@gmail.com' },
-    { drivername: 'Drew Cano', link: 'drewcano@gmail.com' }])
-  }, [])
 
   return (
     <>
@@ -50,7 +45,7 @@ const Notifications = ({ basicData }) => {
           <h3 className='admin-notif-heading'>Notifications</h3>
           {notfs.map((value, key) => {
             return (
-              <p className='user-notif-link'>
+              <p className='user-notif-link' key={key}>
                 <GrOverview /> {value.description}
               </p>
             )
