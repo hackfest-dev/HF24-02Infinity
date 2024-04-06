@@ -7,6 +7,12 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
     const [message, setMessage] = useState('')
 
+    const formatDateTime = (dateTime) => {
+        const date = new Date(dateTime)
+        const localeString = date.toLocaleString()
+        return localeString
+    }
+
     const getCurrentBids = async () => {
         if (localStorage.getItem("userId")) {
             const response = await fetch(
@@ -136,7 +142,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.source}</p>
                             <p>{value.destination}</p>
                             <p>{value.currentBiddingPrice}</p>
-                            <p>{value.bidEndDate}</p>
+                            <p>{formatDateTime(value.bidEndDate)}</p>
                             <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             <button onClick={() => lowerBid(value._id)}>Lower bid</button>
                         </div>)

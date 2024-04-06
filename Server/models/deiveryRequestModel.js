@@ -58,9 +58,6 @@ const deliveryRequestSchema = mongoose.Schema({
         type: Date,
         default: getDefaultBidEndDate
     },
-    bidStatus: {
-        type: String
-    }
 }, {
     timestamps: true
 })

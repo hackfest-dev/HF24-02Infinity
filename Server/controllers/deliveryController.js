@@ -94,7 +94,75 @@ const getCurrentBids = asyncHandler(async (req, res) => {
     }
 })
 
+const joinWaitList = asyncHandler(async (req, res) => {
+
+    try {
+        const { userId, deliveryId } = req.body
+
+        const driver = await User.findOne({ _id: userId })
+
+        if( !driver || driver.type !== 'driver' ){
+            return res.status(403).json({ message: 'Access Denied', status: 403 })
+        }
+
+        const currentDate = new Date()
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate } })
+
+        if( !bid ) {
+            return res.status(400).json({ message: 'Bad request', status: 400 })
+        }
+
+        bid.currentWaitList.append({
+            userId, date: currentDate
+        })
+
+        await bid.save()
+
+        return res.status(200).json({ message: 'Added to waiting list', status: 200 })
+        
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: 'Internal server error', status: 500 })
+    }
+})
+
+const lowerBid = asyncHandler(async (req, res) => {
+
+    try {
+        const { userId, deliveryId, lowerAmount } = req.body
+
+        const driver = await User.findOne({ _id: userId })
+
+        if( !driver || driver.type !== 'driver' ){
+            return res.status(403).json({ message: 'Access Denied', status: 403 })
+        }
+
+        const currentDate = new Date()
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate }, currentBiddingPrice: { $gt: lowerAmount } })
+
+        if( !bid ) {
+            return res.status(400).json({ message: 'Bad request', status: 400 })
+        }
+
+        bid.currentWaitList = [{
+            userId,
+            date: currentDate
+        }]
+        bid.currentBiddingPrice = lowerAmount
+
+        await bid.save()
+
+        return res.status(200).json({ message: 'Lowered the bid successfully', status: 200 })
+        
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: 'Internal server error', status: 500 })
+    }
+})
+
 module.exports = {
     newRequest,
-    getCurrentBids
+    getCurrentBids,
+    joinWaitList,
+    lowerBid
 }
