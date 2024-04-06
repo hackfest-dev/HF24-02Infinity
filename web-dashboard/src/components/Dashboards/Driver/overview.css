@@ -1,10 +1,9 @@
-body{
-        font-family: "Poppins", sans-serif;
-        font-weight: 400;
-        font-style: normal;
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
 }
 
-.overview-container{
+.overview-container {
     width: 68vw;
     background-color: rgba(232, 232, 232, 0.555);
     /* border-right: 2px solid black;
@@ -42,7 +41,7 @@ p {
     flex-direction: row;
 }
 
-.charts{
+.charts {
     margin: 20px;
     background-color: #E3F5FF;
     padding: 20px;
@@ -53,27 +52,28 @@ p {
     font-weight: 600;
 }
 
-.location-details{
+.location-details {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5rem;   
+    gap: 5rem;
 }
 
-.locations , .driver-details{
+.locations,
+.driver-details {
     border: 2px solid #dbdbdb;
     border-radius: 5px;
     margin: 20px;
     padding: 10px;
-    width:550px;
+    width: 550px;
     height: 20vh;
     font-weight: 600;
 }
 
 .driver-bid-container {
-    background-color: #ccc;
+    background-color: #E3F5FF;
     padding: 2rem;
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 
 .driver-bid-header {
@@ -87,15 +87,14 @@ p {
 
 .driver-bids-list {
     display: flex;
-    flex-direction: column;
     gap: 2rem;
     margin: 2rem 0;
 }
 
 .driver-bid {
     display: flex;
-    gap: 5rem;
-    background-color: #dbdbdb;
+    gap: 2rem;
+    background-color: #fffb8062;
     justify-content: space-between;
     align-items: center;
 }
@@ -130,4 +129,30 @@ p {
     display: flex;
     justify-content: end;
     align-items: end;
+}
+
+.driver-bids-list {
+    display: grid;
+}
+
+.button-lower-bid{
+    background-color: rgba(130, 220, 78, 0.512);
+    margin-right: 10px;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
+.join-waiting-list{
+    background-color: bisque;
+    border-radius: 10px;
+}
+
+.lower-amount{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.bid-options{
+    margin-left: 10px;
 }

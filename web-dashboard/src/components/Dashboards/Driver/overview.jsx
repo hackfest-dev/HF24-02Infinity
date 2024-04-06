@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './overview.css'
 
 import { LuRefreshCw } from "react-icons/lu"
+import GetPlaceName from './maps'
 
 const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
@@ -138,7 +139,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 </div>
             </div>
             <div className="charts">
-                <div> Driver details</div>
+                <div><GetPlaceName/></div>
             </div>
             <div className="contents-driver">
             </div>
@@ -156,12 +157,12 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                         <label htmlFor="lower-amount">Enter the lower amount: </label>
                         <input type="number" required value={selectedItem.amount} onChange={(e) => setSelectedItem({ ...selectedItem, amount: e.target.value })} />
                     </div>
-                    <div>
-                        <button onClick={() => setIsLowerBid({ status: false })}>Cancel</button>
-                        <button onClick={() => lowerBid()}>Submit</button>
+                    <div >
+                        <button className='bid-options' onClick={() => setIsLowerBid({ status: false })}>Cancel</button>
+                        <button className='bid-options' onClick={() => lowerBid()}>Submit</button>
                     </div>
                 </div>}
-                {bids.length !== 0 &&
+                {/* {bids.length !== 0 &&
                     <div className='driver-bid-header'>
                         <p>Name</p>
                         <p>Source</p>
@@ -169,20 +170,20 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                         <p>Current-Price</p>
                         <p>BidEndTime</p>
                     </div>
-                }
+                } */}
                 <div className='driver-bids-list'>
                     {bids.map((value, key) => {
                         return (<div className='driver-bid' key={key}>
-                            <p>{value.name}</p>
-                            <p>{value.source}</p>
-                            <p>{value.destination}</p>
-                            <p>{value.currentBiddingPrice}</p>
-                            <p>{formatDateTime(value.bidEndDate)}</p>
+                            <p><h3>Name</h3>{value.name}</p>
+                            <p><h3>Source Destination</h3>{value.source}</p>
+                            <p><h3>Final Destination</h3>{value.destination}</p>
+                            <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
+                            <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
                             {value.currentWaitList.length >= 1 && value.currentWaitList[0].userId === userId ?
                                 <p>You are in the top of waiting list</p> :
-                                <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
+                                <button className="join-waiting-list"onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             }
-                            <button onClick={() => {
+                            <button className="button-lower-bid" onClick={() => {
                                 setSelectedItem({ id: value._id, amount: 0 })
                                 setIsLowerBid({ status: true, id: value._id })
                             }}>Lower bid</button>
