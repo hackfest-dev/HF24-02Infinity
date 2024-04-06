@@ -7,6 +7,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
     const [bids, setBids] = useState([])
 
+    const [userId, setUserId] = useState('')
+
     const [message, setMessage] = useState('')
     const [isLowerBid, setIsLowerBid] = useState({ status: false, id: '' })
     const [selectedItem, setSelectedItem] = useState({ amount: 0, id: '' })
@@ -43,6 +45,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
     }
     useEffect(() => {
         getCurrentBids()
+        setUserId(localStorage.getItem('userId'))
     }, [])
 
     const refreshBids = () => {
@@ -172,6 +175,9 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.destination}</p>
                             <p>{value.currentBiddingPrice}</p>
                             <p>{formatDateTime(value.bidEndDate)}</p>
+                            {value.currentWaitList[0].userId === userId &&
+                                <p>You are in the top of waiting list</p>
+                            }
                             <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             <button onClick={() => {
                                 setSelectedItem({ id: value._id, amount: 0 })
