@@ -25,13 +25,6 @@ const SideNav = () => {
           <h3 className='user-side-nav-heading'>Pages</h3>
           <p className='user-side-nav-link'><TbListDetails />Driver Details</p>
           <p className='user-side-nav-link'><FaLocationDot />Current Location</p>
-          <p className='user-side-nav-link'><ImSleepy2 />Drowsiness</p>
-          <p className='user-side-nav-link'><RiEmotionNormalFill />Emotions</p>
-          <p className='user-side-nav-link'><BsSpeedometer />Speed</p>
-          <p className='user-side-nav-link'><GiDistraction />Distracted Driving</p>
-          <p className='user-side-nav-link'><FaClipboardUser />Customer Details</p>
-          <p className='user-side-nav-link'><FaRegAddressCard />Address</p>
-          <p className='user-side-nav-link'><VscHistory />History</p>
         </div>
       </div >
     </>

@@ -15,7 +15,7 @@ body {
     border-radius: 5px;
     margin: 30px;
     padding: 30px;
-    width: 450px;
+    width: 1300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #E3F5FF;
     border-radius: 1rem;
@@ -68,6 +68,12 @@ p {
     width: 550px;
     height: 20vh;
     font-weight: 600;
+}
+
+.driver-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .driver-bid-container {
@@ -155,4 +161,12 @@ p {
 
 .bid-options{
     margin-left: 10px;
+}
+
+.chart2{
+    height: 70vh;
+}
+
+.driver-bids-list h2 {
+    text-align: center;
 }

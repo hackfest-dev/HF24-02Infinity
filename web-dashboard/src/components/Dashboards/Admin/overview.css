@@ -69,3 +69,11 @@ p {
     height: 20vh;
     font-weight: 600;
 }
+
+.charts-line{
+    display: block;
+    box-sizing: border-box;
+    height: 100px;
+    width: 1200px;
+    position:fixed;
+}

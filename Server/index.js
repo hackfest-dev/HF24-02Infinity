@@ -17,7 +17,9 @@ app.use('/api/delivery', require('./routes/deliveryRoutes'))
 
 app.use('/api/notification', require('./routes/notificationsRoutes'))
 
-app.use('/api/mldata', require('./routes/mlDataSavingRoutes'))
+app.use('/api/dashboard', require('./routes/dashboardRoutes'))
+
+app.use('/api/mldata', require('./routes/dashboardRoutes'))
 
 app.use('/', (req, res) => {
     res.status(400).json({ message: "Page Not found" })

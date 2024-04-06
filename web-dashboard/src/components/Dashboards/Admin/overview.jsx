@@ -1,7 +1,8 @@
 import React from 'react';
 import './overview.css';
+import LineChart from './Charts';
 
-const Overview = ({  totaldriver, totalcustomer, ongoingfleet }) => {
+const Overview = ({ }) => {
     return (
         <div className='overview-container'>
 
@@ -10,7 +11,7 @@ const Overview = ({  totaldriver, totalcustomer, ongoingfleet }) => {
                     {/* <IoIosPerson /> */}
                     <div className="card-content1">
                         <h3>Total Drivers</h3>
-                        <p>3</p>
+                        {/* <p>{basicData.driversCount}</p> */}
                     </div>
                 </div>
                 <div className="card">
@@ -28,14 +29,11 @@ const Overview = ({  totaldriver, totalcustomer, ongoingfleet }) => {
                     </div>
                 </div>
             </div>
-            <div className="charts">
-            <div> Driver details</div>
-            </div>
-            <div className="contents-driver">
-            </div>
-            <div className="location-details">
-                <div className='driver-details'>Driver details</div>
-                <div className='locations'>Locations</div>
+            <br />
+            <div className="overview">
+                <div className="charts-line">
+                    <LineChart />
+                </div>
             </div>
 
         </div>

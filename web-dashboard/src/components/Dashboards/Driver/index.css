@@ -2,3 +2,15 @@
     display: flex;
     flex-direction: row;
 }
+
+.admin-side-nav-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.admin-side-nav-link p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
