@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './index.css'
 
-import { GrOverview } from "react-icons/gr"
 import { FaRegCircleUser } from "react-icons/fa6"
 
-import { Link, } from 'react-router-dom'
-
-const Notifications = () => {
-
-  const [activeDrivers, setActiveDrivers] = useState([])
-
-  useEffect(() => {
-    setActiveDrivers([{ drivername: 'Joseph', link: 'joseph@gmail.com' },
-    { drivername: 'Drew Cano', link: 'drewcano@gmail.com' }])
-  }, [])
+const Notifications = ({ basicData }) => {
 
   return (
     <>
       <div className='admin-notif-container'>
         <div className='admin-notif-container'>
-          <h3 className='admin-notif-heading'>Notifications</h3>
-          <p className='admin-notif-link'><GrOverview />Somebody Just accepted</p>
-        </div>
-        <div className='admin-notif-container'>
           <h3 className='admin-notif-heading'>Contacts</h3>
-          {activeDrivers.map((driver, key) => {
+          {basicData && basicData.customersList && basicData.customersList.length === 0 &&
+            <p>No contacts found</p>
+          }
+          {basicData && basicData.customersList && basicData.customersList.map((driver, key) => {
             return (
-              <Link className='admin-notif-link' to='#' key={key}><FaRegCircleUser />{driver.drivername}</Link>
+              <div className='admin-notif-link' key={key}>
+                <FaRegCircleUser />
+                <p>{driver.email}</p>
+                <p>{driver.mobileNumber}</p>
+              </div>
             )
           })}
         </div>

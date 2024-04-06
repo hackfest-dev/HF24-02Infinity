@@ -52,17 +52,19 @@ const getAdminBasicDetails = asyncHandler(async (req, res) => {
         if (admin.type !== 'admin') {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
+        
+        const deliveries = await LiveDelivery.find({})
+
+        let customersList = []
+        deliveries.forEach(async element => {
+            const user = await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 })
+            customersList.push(user)
+        })
 
         const driversCount = await User.countDocuments({ type: 'driver' })
         const customersCount = await User.countDocuments({ type: 'user' })
         const fleetCount = await LiveDelivery.countDocuments({})
 
-        const deliveries = await LiveDelivery.find({ })
-
-        let customersList = [ ]
-        deliveries.forEach(async element => {
-            customersList.push(await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 }))
-        })
 
         return res.status(200).json({ customersList, customersCount, driversCount, fleetCount, status: 200 })
 
