@@ -117,21 +117,18 @@ const Overview = ({ basicData }) => {
 
             <div className="overview">
                 <div className="card">
-                    {/* <IoIosPerson /> */}
                     <div className="card-content1">
                         <h3>Total Drivers</h3>
                         <p>{basicData.driversCount}</p>
                     </div>
                 </div>
                 <div className="card">
-                    {/* <img alt={title} /> */}
                     <div className="card-content2">
                         <h3>Customers</h3>
                         <p>{basicData.customersCount}</p>
                     </div>
                 </div>
                 <div className="card">
-                    {/* <img alt={title} /> */}
                     <div className="card-content3">
                         <h3>On going Fleets</h3>
                         <p>{basicData.fleetCount}</p>
