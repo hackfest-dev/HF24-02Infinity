@@ -63,3 +63,24 @@ Pre-trained weights helped achieve faster convergence with fewer iterations.
 Hyperparameter tuning for improved accuracy.
 Extension to detect additional driver behaviors.
 Integration with existing monitoring systems.
+
+# Realtime coordinate tracking using mobile gps
+
+## Overview
+This repository contains the code for a automated system to monitor and transfer realtime coordinates ,speed and violations  of truck drivers while they are on jobs.
+
+## Requirements
+- Flutter
+- Geolocator ^11.0.0
+- geocoding ^3.0.0
+- dio ^5.4.2+1
+
+**Challenges and Solutions:**
+1.Data Transmission Issues.
+2.Optimize data transmission protocols to minimize bandwidth usage and reduce latency. 
+3.There's a risk of receiving inaccurate or tampered data from the driver's end.
+
+**Future Work:**
+Real-Time Tracking with Geofencing:.
+Integration with Navigation Services.
+Integration with IoT Devices.
