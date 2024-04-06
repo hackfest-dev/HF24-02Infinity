@@ -86,7 +86,25 @@ const login = asyncHandler(async (req, res) => {
 
 })
 
+const customers = asyncHandler(async (req, res) => {
+
+  const { userId } = req.body
+
+  const admin = await User.findOne({ _id: userId })
+
+  if( admin !== null || admin !== undefined ){
+    return res.status(401).json({ message: 'UnAuthorized', status: 401 })
+  }
+
+  const users = await User.find({ type: 'user' })
+  const drivers = await User.find({ type: 'driver' })
+
+  return res.status(200).json({ admin, users, drivers })
+
+})
+
 module.exports = {
   register,
-  login
+  login,
+  customers,
 }
