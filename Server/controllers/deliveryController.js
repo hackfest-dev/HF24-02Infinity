@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler")
 const DeliveryRequest = require("../models/deiveryRequestModel")
 const User = require("../models/userModel")
+const Notification = require("../models/notificationModel")
 
 const fetch = require('node-fetch')
 
@@ -57,7 +58,34 @@ const newRequest = asyncHandler(async (req, res) => {
         if (distanceInKm !== null) {
             const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
-            await DeliveryRequest.create({ ...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice })
+            const { _id } = await DeliveryRequest.create({ ...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice })
+            
+            const intl = setInterval(async () => {
+
+                const request = await DeliveryRequest.findById(_id)
+
+                if (request && request.currentWaitList.length === 0) {
+                    const currentDate = new Date()
+                    // const threeHoursLater = new Date(currentDate.getTime() + (3 * 60 * 60 * 1000))
+                    const threeHoursLater = new Date(currentDate.getTime() + (60 * 1000))
+                    request.bidEndDate = threeHoursLater
+                    request.save()
+                    return
+                }else if (request && request.currentWaitList.length > 0){
+                    const driverId = request.currentWaitList[0].userId
+                    await Notification.create({
+                        userId: driverId,
+                        description: 'You have won the bidding of the shipment name: ' + this.name
+                    })
+
+                    await Notification.create({
+                        userId: req.body.userId,
+                        description: 'Your delivery request is forwarded to delivery driver'
+                    })
+
+                    clearInterval(intl)
+                }
+            }, 60000)
 
             return res.status(200).json({ message: 'Request submitted successfully', totalPrice, status: 200 })
         } else {
@@ -108,10 +136,10 @@ const joinWaitList = asyncHandler(async (req, res) => {
         const currentDate = new Date()
         const bid = await DeliveryRequest.findOne({ _id: deliveryId })
         console.log(bid)
-        if (bid === null || bid  === undefined) {
+        if (bid === null || bid === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
-        
+
         var flag = false
         bid.currentWaitList.map((value, key) => {
             if (value.userId === userId) {
@@ -119,7 +147,7 @@ const joinWaitList = asyncHandler(async (req, res) => {
             }
         })
 
-        if(flag){
+        if (flag) {
             return res.status(200).json({ message: 'You are already present in waiting list', status: 200 })
         }
 
@@ -151,9 +179,10 @@ const lowerBid = asyncHandler(async (req, res) => {
 
         const currentDate = new Date()
 
+
         const bid = await DeliveryRequest.findOne({ _id: deliveryId })
 
-        if (bid === null || bid  === undefined) {
+        if (bid === null || bid === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
 
