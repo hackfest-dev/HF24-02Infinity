@@ -59,12 +59,26 @@ const AddDelivery = () => {
     }
   }
 
+  // const handleImageInput = (e) => {
+  //   const imageFile = e.target.files[0]
+  //   if (imageFile){
+  //     const imageURL = URL.createObjectURL(imageFile)
+  //     setDeliveryData({ ...deliveryData, image: imageURL })
+  //   }else imageFile = ''
+  // }
+
   const handleImageInput = (e) => {
     const imageFile = e.target.files[0]
-    if (imageFile){
-      const imageURL = URL.createObjectURL(imageFile)
-      setDeliveryData({ ...deliveryData, image: imageURL })
-    }else imageFile = ''
+    if (imageFile) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const imageURL = event.target.result;
+        setDeliveryData({ ...deliveryData, image: imageURL })
+      }
+      reader.readAsDataURL(imageFile)
+    } else {
+      setDeliveryData({ ...deliveryData, image: '' })
+    }
   }
 
   return (

@@ -4,6 +4,7 @@ const User = require("../models/userModel")
 const Notification = require("../models/notificationModel")
 
 const fetch = require('node-fetch')
+const LiveDelivery = require("../models/liveDeliveryModel")
 
 const calculateDistanceByRoad = async (lat1, lon1, lat2, lon2) => {
     const apiKey = process.env.GOOGLE_MAPS_API_KEY;
@@ -82,6 +83,23 @@ const newRequest = asyncHandler(async (req, res) => {
                         userId: req.body.userId,
                         description: 'Your delivery request is forwarded to delivery driver'
                     })
+
+                    await LiveDelivery.create({
+                        name: request.name,
+                        source: request.source,
+                        destination: request.destination,
+                        description: request.description,
+                        weight: request.weight,
+                        height: request.height,
+                        width: request.width,
+                        image: request.image,
+                        date: request.date,
+                        price: request.currentBiddingPrice,
+                        userId: req.body.userId,
+                        driverId
+                    })
+
+                    await DeliveryRequest.findOneAndDelete({ _id: request._id })
 
                     clearInterval(intl)
                 }
