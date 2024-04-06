@@ -183,7 +183,7 @@ const Overview = ({ basicData }) => {
                             <p><h3>Final Destination</h3>{value.destination}</p>
                             <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
                             <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
-                            <img src={value.image} alt="" />
+                            <img src={value.image} alt="" width={50} height={50}/>
                             {value.currentWaitList.length >= 1 && value.currentWaitList[0].userId === userId ?
                                 <p>You are in the top of waiting list</p> :
                                 <button className="join-waiting-list" onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
