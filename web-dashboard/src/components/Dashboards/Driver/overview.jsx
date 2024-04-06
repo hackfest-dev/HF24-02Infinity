@@ -101,6 +101,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
         if (data.status === 200) {
             setMessage(data.message)
             getCurrentBids()
+            setIsLowerBid({ status: false, id: '' })
         } else setMessage(data.message)
 
         setTimeout(() => {
@@ -175,10 +176,10 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.destination}</p>
                             <p>{value.currentBiddingPrice}</p>
                             <p>{formatDateTime(value.bidEndDate)}</p>
-                            {value.currentWaitList[0].userId === userId &&
-                                <p>You are in the top of waiting list</p>
+                            {value.currentWaitList[0].userId === userId ?
+                                <p>You are in the top of waiting list</p> :
+                                <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             }
-                            <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             <button onClick={() => {
                                 setSelectedItem({ id: value._id, amount: 0 })
                                 setIsLowerBid({ status: true, id: value._id })
