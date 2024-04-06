@@ -58,6 +58,7 @@ const Notifications = () => {
             )
           })}
         </div>
+        
         <div className='admin-notif-container'>
           <h3 className='admin-notif-heading'>Contacts</h3>
           {activeDrivers.map((driver, key) => {

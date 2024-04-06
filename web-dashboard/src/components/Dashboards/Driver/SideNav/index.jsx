@@ -18,8 +18,7 @@ const SideNav = () => {
         </div>
         <div className='admin-side-nav-container'>
           <h4 className='admin-side-nav-heading'>Pages</h4>
-          <p className='admin-side-nav-link'><FaClipboardUser />Customer Details</p>
-          <p className='admin-side-nav-link'><FaRegAddressCard />Address</p>
+          <p className='admin-side-nav-link'><FaClipboardUser />Customer Details</p>  
         </div>
         <h4 className='admin-side-nav-container'>Logout</h4>
       </div >

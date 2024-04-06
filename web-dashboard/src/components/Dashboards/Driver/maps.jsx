@@ -6,8 +6,8 @@ const GetPlaceName = () => {
 
   useEffect(() => {
 
-    const latitude = 62.9141; // Example latitude
-    const longitude = 74.8560; // Example longitude
+    const latitude = 12.917
+    const longitude = 74.856; 
 
     // Load the Google Maps JavaScript API script
     const script = document.createElement('script');
@@ -42,7 +42,7 @@ const GetPlaceName = () => {
 
   return (
     <div>
-      <h1>Place Name: {placeName}</h1>
+      <p>Place Name: {placeName}</p>
     </div>
   );
 };

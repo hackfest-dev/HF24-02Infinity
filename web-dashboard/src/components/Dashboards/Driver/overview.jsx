@@ -141,13 +141,13 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 </div>
             </div>
             <div className="chart2">
-                <div><MapComponent/></div>
+                <MapComponent/>
             </div>
             <div className="contents-driver">
             </div>
             <div className="location-details">
                 <div className='driver-details'>Driver details</div>
-                <div className='locations'>Locations</div>
+                {/* <div className='locations'>Locations</div> */}
             </div>
             <div className='driver-bid-container'>
                 <div className='driver-refresh-container'>
