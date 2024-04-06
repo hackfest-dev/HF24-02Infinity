@@ -12,10 +12,21 @@ const mlDataSync = asyncHandler(async (req, res) => {
     if (speed > 60) {
       result.speed = result.speed + 1;
     }
-    result.anomalies+=anomalies
+    result.anomalies += anomalies;
     result.currentLocation = `${latitude},${longitude}`;
     // result.penalty=result.penalty+penalty
-    await result.save();
+    // await result.save();
+    result.save(function (err, savedDoc) {
+      if (err) {
+        return res
+          .status(200)
+          .json({ message: "data synced successfully", status: 200 });
+      } else {
+        return res
+          .status(500)
+          .json({ message: "Failed to sync data", status: 500 });
+      }
+    });
     // if(result.modifiedCount==1){
     //     return res.status(200).json({ message: 'data synced successfully', status: 200 })
     // } else {
