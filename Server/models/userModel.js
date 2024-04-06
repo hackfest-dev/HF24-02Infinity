@@ -1,7 +1,6 @@
 
 const mongoose = require('mongoose')
 
-//User model definition
 const userSchema = mongoose.Schema({
     email: {
         type: String,

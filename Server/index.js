@@ -7,17 +7,19 @@ const cors = require("cors")
 
 connectDB()
 
-app.use( express.json() )
-app.use( express.urlencoded({ extended: false }) )
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use('/api/user', require('./routes/userRoutes'))
 
+app.use('/api/delivery', require('./routes/deliveryRoutes'))
+
 app.use('/', (req, res) => {
-    res.status(400).json({message: "Page Not found"})
+    res.status(400).json({ message: "Page Not found" })
 })
 
 app.use(errorHandler)
 
 const port = process.env.PORT || 5001
-app.listen( port, () => console.log(`Server started at port ${port}`) )
+app.listen(port, () => console.log(`Server started at port ${port}`))

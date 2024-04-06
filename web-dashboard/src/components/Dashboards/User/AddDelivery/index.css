@@ -1,5 +1,6 @@
 .add-delivery-container {
-    background-color: gray;
+    background-color: rgb(236, 236, 236);
+    padding: 1rem;
 }
 
 .add-delivery-form {
@@ -7,4 +8,73 @@
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.add-delivery-form {
+    width: 60%;
+}
+
+.delivery-request-date {
+    width: 100%;
+}
+
+.delivery-request-date label {
+    color: gray;
+    margin-left: 5px;
+}
+
+.add-delivery-form input {
+    display: inline-block;
+    width: 100%;
+    padding: 0 20px;
+    line-height: 50px;
+    height: 65px;
+    background-color: white;
+    border: 2px solid #e6e6e6;
+    border-bottom-width: 3px;
+    border-radius: 5px;
+    outline: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+
+.add-delivery-form textarea {
+    display: inline-block;
+    width: 100%;
+    padding: 0 20px;
+    line-height: 50px;
+    background-color: white;
+    border: 2px solid #e6e6e6;
+    border-bottom-width: 3px;
+    border-radius: 5px;
+    outline: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.add-delivery-request-button {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.add-delivery-request-button:hover {
+    background-color: rgb(168, 168, 168);
+}
+
+.add-delivery-request-message {
+    margin: 0.5rem;
+    font-size: small;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
