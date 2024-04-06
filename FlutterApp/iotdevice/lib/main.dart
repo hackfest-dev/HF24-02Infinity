@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geocode/geocode.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:iotdevice/dio.dart';
 import 'package:shake_detector/shake_detector.dart';
 
 late List<CameraDescription> _cameras;
@@ -73,6 +74,7 @@ class _IotDeviceState extends State<IotDevice> {
         position = position1;
         date= DateTime.now();
         flag = 1;
+        request(position?.latitude??"",position?.longitude??"",position?.speed??"",num);
       });
     // _locationData = await location.getLocation();
   }

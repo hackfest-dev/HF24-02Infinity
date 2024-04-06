@@ -44,6 +44,7 @@ dependencies:
   geocode: ^1.0.3
   tflite_flutter: ^0.10.4
   tflite_v2: ^1.0.0
+  dio: ^5.4.2+1
 
 dev_dependencies:
   flutter_test:
