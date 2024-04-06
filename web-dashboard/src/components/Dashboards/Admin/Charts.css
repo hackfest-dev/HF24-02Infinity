@@ -1,3 +1,6 @@
-.line-chart-heading{
-    margin-left: 30px;
-}
+.line-chart-container {
+    width: 400px; 
+    height: 300px; 
+
+  }
+  
