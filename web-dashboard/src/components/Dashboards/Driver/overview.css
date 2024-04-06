@@ -66,14 +66,14 @@ p {
     margin: 20px;
     padding: 10px;
     width: 550px;
-    height: 20vh;
+    height: max-content;
     font-weight: 600;
 }
 
 .driver-details {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .driver-bid-container {

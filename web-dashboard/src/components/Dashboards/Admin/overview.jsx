@@ -114,11 +114,11 @@ const Overview = ({ basicData }) => {
                     ))}
                 </div>
             </div>
-            <div className="LineChart-container">
+            {/* <div className="LineChart-container">
                 <div className="charts-line">
                     <LineChart />
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )
