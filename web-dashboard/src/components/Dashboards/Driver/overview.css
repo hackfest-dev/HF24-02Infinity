@@ -160,3 +160,7 @@ p {
 .chart2{
     height: 70vh;
 }
+
+.driver-bids-list h2 {
+    text-align: center;
+}

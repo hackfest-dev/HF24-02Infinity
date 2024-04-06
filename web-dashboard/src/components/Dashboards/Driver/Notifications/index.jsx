@@ -4,9 +4,7 @@ import './index.css'
 import { GrOverview } from "react-icons/gr"
 import { FaRegCircleUser } from "react-icons/fa6"
 
-import { Link, } from 'react-router-dom'
-
-const Notifications = () => {
+const Notifications = ({ basicData }) => {
 
   const [activeDrivers, setActiveDrivers] = useState([])
 
@@ -58,12 +56,16 @@ const Notifications = () => {
             )
           })}
         </div>
-        
+
         <div className='admin-notif-container'>
           <h3 className='admin-notif-heading'>Contacts</h3>
-          {activeDrivers.map((driver, key) => {
+          {basicData && basicData.customersList && basicData.customersList.map((driver, key) => {
             return (
-              <Link className='admin-notif-link' to='#' key={key}><FaRegCircleUser />{driver.drivername}</Link>
+              <div className='admin-notif-link' key={key}>
+                <FaRegCircleUser />
+                <p>{driver.email}</p>
+                <p>{driver.mobileNumber}</p>
+              </div>
             )
           })}
         </div>

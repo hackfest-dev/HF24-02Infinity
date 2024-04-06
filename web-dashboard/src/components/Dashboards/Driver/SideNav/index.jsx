@@ -3,7 +3,7 @@ import './index.css'
 
 import { GrOverview } from "react-icons/gr"
 import { IoIosAlert } from "react-icons/io"
-import { FaLocationDot, FaRegAddressCard, FaClipboardUser } from "react-icons/fa6"
+import { FaLocationDot, FaClipboardUser } from "react-icons/fa6"
 
 
 const SideNav = () => {
