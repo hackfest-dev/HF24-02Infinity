@@ -69,3 +69,36 @@ p {
     height: 20vh;
     font-weight: 600;
 }
+
+.driver-bid-container {
+    background-color: #ccc;
+    padding: 2rem;
+    margin: 3rem 0;
+}
+
+.driver-bid-header {
+    display: flex;
+    gap: 6rem;
+}
+
+.driver-bid-header p {
+    width: 5vw;
+}
+
+.driver-bids-list {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.driver-bid {
+    display: flex;
+    gap: 8rem;
+    background-color: #dbdbdb;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.driver-bid button {
+    width: max-content;
+}

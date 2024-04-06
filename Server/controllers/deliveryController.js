@@ -57,7 +57,7 @@ const newRequest = asyncHandler(async (req, res) => {
         if (distanceInKm !== null) {
             const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
-            // await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice})
+            await DeliveryRequest.create({...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice})
 
             return res.status(200).json({ message: 'Request submitted successfully', totalPrice, status: 200 })
         } else {
@@ -70,16 +70,20 @@ const newRequest = asyncHandler(async (req, res) => {
 })
 
 const getCurrentBids = asyncHandler(async (req, res) => {
-    const { userId } = req.body
 
     try {
+        const { userId } = req.body
+        const user = await User.findOne({ _id: userId })
 
-        const user = await User.findById(userId)
+        if(user == undefined || user == null){
+            return res.status(401).json({ message: 'Unauthorized', status: 401 })
+        }
 
         if(user.type === 'user'){
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
+        const currentDate = new Date()
         const bids = await DeliveryRequest.find({ bidEndDate: { $gt: currentDate } })
 
         return res.status(200).json({ bids, status: 200 })
