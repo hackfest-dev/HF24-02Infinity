@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 function getDefaultBidEndDate() {
     const currentDate = new Date()
-    const threeHoursLater = new Date(currentDate.getTime() + (3 * 60 * 60 * 1000))
+    const threeHoursLater = new Date(currentDate.getTime() + (3 * 60 * 1000))
     // const threeHoursLater = new Date(currentDate.getTime() + (60 * 1000))
     return threeHoursLater
 }

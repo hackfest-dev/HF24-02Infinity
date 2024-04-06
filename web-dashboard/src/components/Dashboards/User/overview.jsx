@@ -54,7 +54,7 @@ const Overview = () => {
                                         {/* <p>Current Location: <GetPlaceName latitude={value.currentLocation && value.currentLocation.split(',')[0]} longitude={value.currentLocation && value.currentLocation.split(',')[1]} /></p>
                                         <p>Destination Location: <GetPlaceName latitude={value.destination && value.destination.split(',')[0]} longitude={value.destination && value.destination.split(',')[1]} /></p> */}
                                         <p>Expected Price: {value.price} Rs.</p>
-                                        <p>Speed of Vehicle: {value.avgSpeed ? value.avgSpeed.toFixed(2) : ''} km/h</p>
+                                        <p>Speed of Vehicle: {value.avgSpeed ? value.avgSpeed.toFixed(2) : '0'} km/h</p>
                                         <p>Driver's ID: {value.driverId}</p>
                                     </div>
                                 )
