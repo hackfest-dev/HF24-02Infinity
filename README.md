@@ -81,6 +81,6 @@ This repository contains the code for a automated system to monitor and transfer
 3.There's a risk of receiving inaccurate or tampered data from the driver's end.
 
 **Future Work:**
-Real-Time Tracking with Geofencing:.
+Real-Time Tracking with Geofencing.
 Integration with Navigation Services.
 Integration with IoT Devices.
