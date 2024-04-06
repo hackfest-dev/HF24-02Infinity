@@ -106,17 +106,22 @@ const joinWaitList = asyncHandler(async (req, res) => {
         }
 
         const currentDate = new Date()
-        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate } })
-
-        if (!bid) {
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId })
+        console.log(bid)
+        if (bid === null || bid  === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
-
+        
+        var flag = false
         bid.currentWaitList.map((value, key) => {
             if (value.userId === userId) {
-                return res.status(200).json({ message: 'You are already present in waiting list', status: 200 })
+                return flag = true
             }
         })
+
+        if(flag){
+            return res.status(200).json({ message: 'You are already present in waiting list', status: 200 })
+        }
 
         bid.currentWaitList.push({
             userId, date: currentDate
@@ -145,9 +150,10 @@ const lowerBid = asyncHandler(async (req, res) => {
         }
 
         const currentDate = new Date()
-        const bid = await DeliveryRequest.findOne({ _id: deliveryId, bidEndDate: { $gt: currentDate }, currentBiddingPrice: { $gt: lowerAmount } })
 
-        if (!bid) {
+        const bid = await DeliveryRequest.findOne({ _id: deliveryId })
+
+        if (bid === null || bid  === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
 
