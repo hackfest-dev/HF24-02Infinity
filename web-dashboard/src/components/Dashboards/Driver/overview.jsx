@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import './overview.css';
+import React, { useEffect, useState } from 'react'
+import './overview.css'
+
+import { LuRefreshCw } from "react-icons/lu"
 
 const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
@@ -42,6 +44,10 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
     useEffect(() => {
         getCurrentBids()
     }, [])
+
+    const refreshBids = () => {
+        getCurrentBids()
+    }
 
     const joinWaitList = async (deliveryId) => {
         const response = await fetch(
@@ -91,8 +97,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
         if (data.status === 200) {
             setMessage(data.message)
-            console.log(data)
-        }else setMessage(data.message)
+            getCurrentBids()
+        } else setMessage(data.message)
 
         setTimeout(() => {
             setMessage('')
@@ -135,6 +141,9 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 <div className='locations'>Locations</div>
             </div>
             <div className='driver-bid-container'>
+                <div className='driver-refresh-container'>
+                    <button className='driver-refresh-button' onClick={() => refreshBids()}><LuRefreshCw /> Refresh</button>
+                </div>
                 <p className='driver-bid-message'>{message}</p>
                 {isLowerBid.status && <div className='lower-amount'>
                     <div>
@@ -166,7 +175,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             <button onClick={() => {
                                 setSelectedItem({ id: value._id, amount: 0 })
-                                setIsLowerBid({ status: true, id: value._id })}}>Lower bid</button>
+                                setIsLowerBid({ status: true, id: value._id })
+                            }}>Lower bid</button>
                         </div>)
                     })}
                 </div>
