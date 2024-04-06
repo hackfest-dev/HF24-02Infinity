@@ -17,31 +17,33 @@ def get_tensors():
     y_train = []
     x_val = []
     y_val = []
+    class_mapping = {}  # Dictionary to store class label mapping
     
     # Load training data
-    x_train, y_train = gen_data("D:/nitte_hackathon/drive_data/train_annotations.csv", x_train, y_train,"D:/nitte_hackathon/drive_data/train")
+    x_train, y_train = gen_data("D:/nitte_model_2/train_annotations.csv", x_train, y_train,"D:/nitte_model_2/train")
     
-    # Convert class labels to integers
-    y_train = encode_labels(y_train)
+    # Convert class labels to integers and get the mapping
+    y_train, class_mapping = encode_labels(y_train, class_mapping)
     
     # Convert labels to one-hot encoded format
-    y_train = to_categorical(y_train, num_classes=7)  # Adjust num_classes as per your dataset
+    y_train = to_categorical(y_train, num_classes=len(class_mapping))
     
     # Load validation data
-    x_val, y_val = gen_data("D:/nitte_hackathon/drive_data/val_annotations.csv", x_val, y_val, "D:/nitte_hackathon/drive_data/valid")
+    x_val, y_val = gen_data("D:/nitte_model_2/val_annotations.csv", x_val, y_val, "D:/nitte_model_2/valid")
     
-    # Convert class labels to integers
-    y_val = encode_labels(y_val)
+    # Convert class labels to integers and update the mapping
+    y_val, class_mapping = encode_labels(y_val, class_mapping)
     
     # Convert labels to one-hot encoded format
-    y_val = to_categorical(y_val, num_classes=7)  # Adjust num_classes as per your dataset
+    y_val = to_categorical(y_val, num_classes=len(class_mapping))
     
     return x_train, y_train, x_val, y_val
     
 def gen_data(csv_path, x, y, data_path):
     df = pd.read_csv(csv_path)
+    
     for idx, row in df.iterrows():
-        img_name = row["filename"]
+        img_name = str(row["filename"])
         img_path = os.path.join(data_path, img_name)
         if os.path.exists(img_path):
             img = cv2.imread(img_path)
@@ -50,11 +52,21 @@ def gen_data(csv_path, x, y, data_path):
             y.append(row["class"])  
     return np.array(x), y
 
-def encode_labels(labels):
+def encode_labels(labels, class_mapping=None):
+    if class_mapping is None:
+        class_mapping = {}
+    
     unique_labels = np.unique(labels)
     label_to_index = {label: idx for idx, label in enumerate(unique_labels)}
-    return [label_to_index[label] for label in labels]
+    
+    # Update class mapping dictionary
+    for label, index in label_to_index.items():
+        if label not in class_mapping:
+            class_mapping[label] = index
+    
+    # Encode labels using the mapping
+    encoded_labels = [label_to_index[label] for label in labels]
+    
+    return encoded_labels, class_mapping
 
-# Load data
-x_train, y_train, x_val, y_val = get_tensors()
-
+# Load data and get class mapping
