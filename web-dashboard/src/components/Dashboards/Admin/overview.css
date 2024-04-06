@@ -7,8 +7,7 @@ body{
 .overview-container{
     width: 68vw;
     background-color: rgba(232, 232, 232, 0.555);
-    /* border-right: 2px solid black;
-    border-left: 2px solid black; */
+    height: 83vh;
 }
 
 .card {
@@ -111,4 +110,51 @@ p {
     padding: 1rem 2rem;
     border-radius: 10px;
     border: none;
+}
+
+.admin-card,.driver-card, .users-data,.admin-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.admin-content, .driver-content{
+    gap: 20px;
+}
+
+.driver-card, .users-data {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .driver-card > div, .users-data > div {
+    margin-right: 10px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+  }
+  
+  .user-card , .driver-card, .admin-card{
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .driver-card h2, .users-data h2, .admin-heading , h5{
+    text-align: center; /* Align heading text to the center */
+    width: 100%; /* Make the heading occupy the full width of the container */
+  }
+  
+.driver-bids-list{
+    border: 1.5px solid rgba(83, 83, 83, 0.477);
+    border-radius: 10px;
+    background-color: #E3F5FF;
+}
+
+.LineChart-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px; /* Set the height as per your requirement */
+    z-index: 999; /* Ensure the LineChart is displayed above other content */
+    /* Add any additional styles you need */
 }

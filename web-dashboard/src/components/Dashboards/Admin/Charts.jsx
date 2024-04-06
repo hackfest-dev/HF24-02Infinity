@@ -35,7 +35,7 @@ const LineChart = () => {
   return (
     <div className='line-chart-container'>
       <h2>Line Chart</h2>
-      <div style={{ width: '400px', height: '300px' }}>
+      <div style={{ width: '1000px', height: '300px' }}>
         <canvas ref={chartRef} width='400' height='300' />
       </div>
     </div>

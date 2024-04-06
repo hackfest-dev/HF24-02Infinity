@@ -62,53 +62,64 @@ const Overview = ({ basicData }) => {
                     </div>
                 </div>
             </div>
-            <br />
-            <div className="overview">
+
+            <div className="Card-content-limitation">
+                <div className='driver-bids-list' id='open-bidding-request'>
+                    <h2>Current Bids</h2>
+                    {bids.length === 0 && <h5>No current open bids</h5>}
+                    {bids.map((value, key) => {
+                        return (<div className='driver-bid' key={key}>
+                            <p><h3>Name</h3>{value.name}</p>
+                            <p><h3>Source Destination</h3>{value.source}</p>
+                            <p><h3>Final Destination</h3>{value.destination}</p>
+                            <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
+                            <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
+                            <img src={value.image} alt="" width={50} height={50} />
+                        </div>)
+                    })}
+                </div>
+            </div>
+            <div id='#customers' className='driver-bids-list'>
+                <h2 className='admin-heading '>Admin</h2>
+                <div className="admin-card">
+                    {/* Heading for admin */}
+                    {basicData && basicData.admin &&
+                        <div className="admin-content">
+                            <p>{basicData.admin.email}</p>
+                            <p>{basicData.admin.mobileNumber}</p>
+                        </div>
+                    }
+                </div>
+                <div className="driver-card">
+                    <h2>Drivers</h2> {/* Heading for drivers */}
+                    {basicData && basicData.drivers.map((value, key) => (
+                        <div className='driver-card' key={key}>
+                            <div>
+                                <p>{value.email}</p>
+                                <p>{value.mobileNumber}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="users-data">
+                    <h2>Users</h2> {/* Heading for users */}
+                    {basicData && basicData.users.map((value, key) => (
+                        <div className='user-card' key={key}>
+                            <div>
+                                <p>{value.email}</p>
+                                <p>{value.mobileNumber}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="LineChart-container">
                 <div className="charts-line">
                     <LineChart />
                 </div>
             </div>
-            <div className='driver-bids-list' id='open-bidding-request'>
-                {bids.length === 0 && <h2>No current open bids</h2>}
-                {bids.map((value, key) => {
-                    return (<div className='driver-bid' key={key}>
-                        <p><h3>Name</h3>{value.name}</p>
-                        <p><h3>Source Destination</h3>{value.source}</p>
-                        <p><h3>Final Destination</h3>{value.destination}</p>
-                        <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
-                        <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
-                        <img src={value.image} alt="" width={50} height={50} />
-                    </div>)
-                })}
-            </div>
 
-            <div id='#customers'>
-                <h4>Admin</h4>
-                {basicData && basicData.admin &&
-                    <>
-                        <p>{basicData.admin.email}</p>
-                        <p>{basicData.admin.mobileNumber}</p>
-                    </>
-                }
-
-                <h4>Drivers</h4>
-                {basicData && basicData.drivers.map((value, key) => {
-                    return (
-                        <div key={key}>
-                            <p>{value.email}</p>
-                            <p>{value.mobileNumber}</p>
-                        </div>)
-                })}
-
-                <h4>Users</h4>
-                {basicData && basicData.users.map((value, key) => {
-                    return (
-                        <div key={key}>
-                            <p>{value.email}</p>
-                            <p>{value.mobileNumber}</p>
-                        </div>)
-                })}
-            </div>
         </div>
     )
 }
