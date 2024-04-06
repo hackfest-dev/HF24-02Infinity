@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,15 @@ class _IotDeviceState extends State<IotDevice> {
   var flag=0;
   var imagePath = "";
   var num = 0;
+  var position1;
+  var date;
   Placemark? place;
   @override
   void initState() {
     // getlocation();
+    Timer.periodic(Duration(seconds:1), (Timer timer) {
+      getlocation();
+    });
     ShakeDetector.autoStart(
         onShake: () => {
               setState(() {
@@ -59,12 +65,14 @@ class _IotDeviceState extends State<IotDevice> {
   }
 
   Future<void> getlocation() async {
-      position = await _determinePosition();
-      GeoCode geoCode = GeoCode();
-      Address address = await geoCode.reverseGeocoding(latitude: position!.latitude, longitude: position!.longitude);
-      print(address.toString());
+       position1 = await _determinePosition();
+      // GeoCode geoCode = GeoCode();
+      // Address address = await geoCode.reverseGeocoding(latitude: position!.latitude, longitude: position!.longitude);
+      // print(address.toString());
       setState(() {
-        _currentAddress = "${address.streetAddress}, ${address.city}, ${address.countryName}, ${address.postal}";
+        position = position1;
+        date= DateTime.now();
+        flag = 1;
       });
     // _locationData = await location.getLocation();
   }
@@ -104,49 +112,51 @@ class _IotDeviceState extends State<IotDevice> {
         body:Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            if (imagePath != "")
-              Container(
-                  width: 300,
-                  height: 300,
-                  child: Image.file(
-                    File(imagePath),
-                  )),
-            Center(
-              child: TextButton(
-                  onPressed: () async {
-                    try {
-                      final image = await controller!.takePicture();
-                      setState(() {
-                        imagePath = image.path;
-                      });
-                    } catch (e) {
-                      print(e);
-                    }
-                  },
-                  child: const Text("click Photo")),
-            ),
+            // if (imagePath != "")
+            //   Container(
+            //       width: 300,
+            //       height: 300,
+            //       child: Image.file(
+            //         File(imagePath),
+            //       )),
+            // Center(
+            //   child: TextButton(
+            //       onPressed: () async {
+            //         try {
+            //           final image = await controller!.takePicture();
+            //           setState(() {
+            //             imagePath = image.path;
+            //           });
+            //         } catch (e) {
+            //           print(e);
+            //         }
+            //       },
+            //       child: const Text("click Photo")),
+            // ),
             Text(
               num.toString(),
               style: const TextStyle(fontSize: 20, color: Colors.red),
             ),
             Text(
-              "${position?.latitude} ${position?.longitude}",
+              "${position?.latitude??""} ${position?.longitude??""}",
               style: const TextStyle(fontSize: 20, color: Colors.red),
             ),
-            Center(
-              child: TextButton(
-                  onPressed: () async{
-                    var position1 = await _determinePosition();
-                    setState(() {
-                      position = position1;
-                      flag=1;
-                    });
-                  },
-                  child: const Text("click for location")),
-            ),
-            (flag==1)?Text(
-              "lat:${position?.latitude}\nlong:${position?.longitude}\nplace:$_currentAddress",
-              style: const TextStyle(fontSize: 20, color: Colors.red),
+            // Center(
+            //   child: TextButton(
+            //       onPressed: () async{
+            //         // var position1 = await _determinePosition();
+            //         setState(() {
+            //           position = position1;
+            //           flag=1;
+            //         });
+            //       },
+            //       child: const Text("click for location")),
+            // ),
+            (flag==1)?Center(
+              child: Text(
+                "lat:${position?.latitude}\nlong:${position?.longitude}\nspeed:${position?.speed.toStringAsFixed(1)}\ntime:${date}",
+                style: const TextStyle(fontSize: 20, color: Colors.red),
+              ),
             ):Container(),
           ],
         ));

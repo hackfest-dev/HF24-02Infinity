@@ -1,2 +1,2 @@
-0:not drowsey
-1:drowsy
+0 not drowsey
+1 drowsy
