@@ -31,7 +31,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                         "Content-Type": "Application/json",
                     },
                     body: JSON.stringify({
-                        userId
+                        userId: localStorage.getItem('userId')
                     }),
                 }
             )
@@ -52,7 +52,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
     }, [])
 
     const refreshBids = () => {
-        getCurrentBids(userId)
+        getCurrentBids(localStorage.getItem('userId'))
     }
 
     const joinWaitList = async (deliveryId) => {

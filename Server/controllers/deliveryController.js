@@ -59,7 +59,7 @@ const newRequest = asyncHandler(async (req, res) => {
             const totalPrice = calculatePrice(parseInt(weight), parseInt(height), parseInt(width), parseInt(distanceInKm))
 
             const { _id } = await DeliveryRequest.create({ ...req.body, startingBiddingPrice: totalPrice, currentBiddingPrice: totalPrice })
-            
+
             const intl = setInterval(async () => {
 
                 const request = await DeliveryRequest.findById(_id)
@@ -71,7 +71,7 @@ const newRequest = asyncHandler(async (req, res) => {
                     request.bidEndDate = threeHoursLater
                     request.save()
                     return
-                }else if (request && request.currentWaitList.length > 0){
+                } else if (request && request.currentWaitList.length > 0) {
                     const driverId = request.currentWaitList[0].userId
                     await Notification.create({
                         userId: driverId,
@@ -135,7 +135,6 @@ const joinWaitList = asyncHandler(async (req, res) => {
 
         const currentDate = new Date()
         const bid = await DeliveryRequest.findOne({ _id: deliveryId })
-        console.log(bid)
         if (bid === null || bid === undefined) {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
@@ -156,7 +155,6 @@ const joinWaitList = asyncHandler(async (req, res) => {
         })
 
         const updatedBid = await bid.save()
-        console.log('UpdatedBid', updatedBid)
 
         return res.status(200).json({ message: 'Added to waiting list', status: 200 })
 
