@@ -30,7 +30,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                         "Content-Type": "Application/json",
                     },
                     body: JSON.stringify({
-                        userId: localStorage.getItem("userId")
+                        userId
                     }),
                 }
             )
@@ -39,17 +39,19 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
 
             if (data.status === 200) {
                 setBids(data.bids)
-                console.log(data.bids)
             }
         }
     }
     useEffect(() => {
-        getCurrentBids()
-        setUserId(localStorage.getItem('userId'))
+        const userId = localStorage.getItem('userId')
+        if (userId) {
+            getCurrentBids(userId)
+            setUserId(userId)
+        }
     }, [])
 
     const refreshBids = () => {
-        getCurrentBids()
+        getCurrentBids(userId)
     }
 
     const joinWaitList = async (deliveryId) => {
@@ -62,7 +64,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                     "Content-Type": "Application/json",
                 },
                 body: JSON.stringify({
-                    userId: localStorage.getItem("userId"),
+                    userId,
                     deliveryId
                 }),
             }
@@ -89,7 +91,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                     "Content-Type": "Application/json",
                 },
                 body: JSON.stringify({
-                    userId: localStorage.getItem("userId"),
+                    userId,
                     deliveryId: selectedItem.id,
                     lowerAmount: selectedItem.amount,
                 }),
@@ -176,7 +178,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.destination}</p>
                             <p>{value.currentBiddingPrice}</p>
                             <p>{formatDateTime(value.bidEndDate)}</p>
-                            {value.currentWaitList[0].userId === userId ?
+                            {value.currentWaitList.length >= 1 && value.currentWaitList[0].userId === userId ?
                                 <p>You are in the top of waiting list</p> :
                                 <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
                             }
