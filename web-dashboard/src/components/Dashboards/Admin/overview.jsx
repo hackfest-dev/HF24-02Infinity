@@ -6,8 +6,6 @@ const Overview = ({ basicData }) => {
 
     const [bids, setBids] = useState([])
 
-    
-
     const formatDateTime = (dateTime) => {
         const date = new Date(dateTime)
         const localeString = date.toLocaleString()
@@ -84,9 +82,32 @@ const Overview = ({ basicData }) => {
                 })}
             </div>
 
-            <div className='customers'>
+            <div id='#customers'>
                 <h4>Admin</h4>
+                {basicData && basicData.admin &&
+                    <>
+                        <p>{basicData.admin.email}</p>
+                        <p>{basicData.admin.mobileNumber}</p>
+                    </>
+                }
 
+                <h4>Drivers</h4>
+                {basicData && basicData.drivers.map((value, key) => {
+                    return (
+                        <div key={key}>
+                            <p>{value.email}</p>
+                            <p>{value.mobileNumber}</p>
+                        </div>)
+                })}
+
+                <h4>Users</h4>
+                {basicData && basicData.users.map((value, key) => {
+                    return (
+                        <div key={key}>
+                            <p>{value.email}</p>
+                            <p>{value.mobileNumber}</p>
+                        </div>)
+                })}
             </div>
         </div>
     )

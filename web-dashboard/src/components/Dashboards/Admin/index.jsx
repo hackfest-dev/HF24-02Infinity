@@ -13,6 +13,9 @@ const AdminDashboard = () => {
     customersCount: 0,
     driversCount: 0,
     fleetCount: 0,
+    drivers: [],
+    users: [],
+    admin: ''
   })
 
   const getBasicData = async () => {
@@ -40,7 +43,9 @@ const AdminDashboard = () => {
           customersCount: data.customersCount,
           driversCount: data.driversCount,
           fleetCount: data.fleetCount,
-          
+          admin: data.admin,
+          drivers: data.drivers,
+          users: data.users
         })
       }
     }

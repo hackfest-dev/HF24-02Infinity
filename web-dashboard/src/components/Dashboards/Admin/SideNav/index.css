@@ -21,8 +21,13 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    font-size:medium;
+    font-size: medium;
     padding: 0.3rem 1rem;
     background-color: rgb(231, 231, 231);
     border-radius: 10px;
+}
+
+.admin-side-nav a {
+    text-decoration: none;
+    color: inherit;
 }
