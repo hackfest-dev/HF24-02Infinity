@@ -1,58 +1,71 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose')
-
-const liveDeliverySchema = mongoose.Schema({
+const liveDeliverySchema = mongoose.Schema(
+  {
     userId: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     driverId: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     name: {
-        type: String
+      type: String,
     },
     source: {
-        type: String
+      type: String,
     },
     destination: {
-        type: String
+      type: String,
     },
     description: {
-        type: String
+      type: String,
     },
     weight: {
-        type: String
+      type: String,
     },
     height: {
-        type: String
+      type: String,
     },
     width: {
-        type: String
+      type: String,
     },
     image: {
-        type: String,
+      type: String,
     },
     date: {
-        type: String
+      type: String,
     },
     price: {
-        type: Number
+      type: Number,
     },
-    anomaly: [],
+    speedviolation: {
+      type: Number,
+      default:0
+    },
+    drowsiness: {
+      type: Number,
+      default:0
+    },
+    anomalies: {
+      type: Number,
+      default:0
+    },
     penalty: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0,
     },
     speed: {
-        type: String
+      type: Number,
     },
     currentLocation: {
-        type: String
-    }
-}, {
-    timestamps: true
-})
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('LiveDelivery', liveDeliverySchema)
+module.exports = mongoose.model("LiveDelivery", liveDeliverySchema);

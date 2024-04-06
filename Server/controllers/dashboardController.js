@@ -22,14 +22,14 @@ const getDriverBasicDetails = asyncHandler(async (req, res) => {
         const admin = await User.findOne({ type: 'admin' }, { _id: 0, _v: 0 })
         const deliveries = await LiveDelivery.find({ driverId: userId })
 
-        let customersList = [ admin ]
+        let customersList = [admin]
         deliveries.forEach(async element => {
             customersList.push(await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 }))
         })
 
         const driversCount = await User.countDocuments({ type: 'driver' })
         const customersCount = await User.countDocuments({ type: 'user' })
-        const fleetCount = await LiveDelivery.countDocuments({ driverId: userId  })
+        const fleetCount = await LiveDelivery.countDocuments({ driverId: userId })
 
         return res.status(200).json({ driver: { email: driver.email, mobileNumber: driver.mobileNumber }, customersList, customersCount, driversCount, fleetCount, status: 200 })
 
@@ -53,18 +53,22 @@ const getAdminBasicDetails = asyncHandler(async (req, res) => {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
+        const deliveries = await LiveDelivery.find({})
+
+        let customersList = []
+        deliveries.forEach(async element => {
+            const user = await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 })
+            customersList.push(user)
+        })
+
         const driversCount = await User.countDocuments({ type: 'driver' })
         const customersCount = await User.countDocuments({ type: 'user' })
         const fleetCount = await LiveDelivery.countDocuments({})
 
-        const deliveries = await LiveDelivery.find({ })
+        const users = await User.find({ type: 'user' })
+        const drivers = await User.find({ type: 'driver' })
 
-        let customersList = [ ]
-        deliveries.forEach(async element => {
-            customersList.push(await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 }))
-        })
-
-        return res.status(200).json({ customersList, customersCount, driversCount, fleetCount, status: 200 })
+        return res.status(200).json({ users, drivers, admin, customersList, customersCount, driversCount, fleetCount, status: 200 })
 
     } catch (err) {
         console.error(err)
@@ -89,7 +93,7 @@ const getUserBasicDetails = asyncHandler(async (req, res) => {
         const admin = await User.find({ type: 'admin' }, { _id: 0, _v: 0 })
         const deliveries = await LiveDelivery.find({ driverId: userId })
 
-        let customersList = [ admin ]
+        let customersList = [admin]
         deliveries.forEach(async element => {
             customersList.push(await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 }))
         })

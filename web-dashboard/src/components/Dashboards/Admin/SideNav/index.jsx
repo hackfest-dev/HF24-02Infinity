@@ -12,6 +12,8 @@ import { BsSpeedometer } from "react-icons/bs"
 import { GiDistraction } from "react-icons/gi"
 import { VscHistory } from "react-icons/vsc"
 
+import { Link } from 'react-router-dom'
+
 const SideNav = () => {
   return (
     <>
@@ -20,8 +22,8 @@ const SideNav = () => {
           <h4 className='admin-side-nav-heading'>Dashboards</h4>
           <p className='admin-side-nav-link'><GrOverview />Overview</p>
           <p className='admin-side-nav-link'><FaHistory />Driver History</p>
-          <p className='admin-side-nav-link'><IoIosAlert />Biddings</p>
-          <p className='admin-side-nav-link'><FaUserGroup />Customers</p>
+          <a className='admin-side-nav-link' href='#open-bidding-request'><IoIosAlert />Biddings</a>
+          <a className='admin-side-nav-link' href='#customers'><FaUserGroup />Customers</a>
         </div>
         <div className='admin-side-nav-container'>
           <h4 className='admin-side-nav-heading'>Pages</h4>
