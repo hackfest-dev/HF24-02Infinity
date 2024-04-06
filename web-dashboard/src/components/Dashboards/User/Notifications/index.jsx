@@ -47,7 +47,7 @@ const Notifications = () => {
           <h3 className='user-notif-heading'>Notifications</h3>
           {notfs.map((value, key) => {
             return (
-              <p className='user-notif-link'>
+              <p className='user-notif-link' key={key}>
                 <GrOverview /> {value.description}
               </p>
             )
