@@ -3,9 +3,9 @@ const asyncHandler = require("express-async-handler");
 const liveDeliveryModel = require("../models/liveDeliveryModel");
 
 const mlDataSync = asyncHandler(async (req, res) => {
-  const { latitude, longitude, averageSpeed, anomalies, penalty, driverId, speedViolation } = req.body
+  const { latitude, longitude, averageSpeed, anomalies, penalty, deliveryId, speedViolation } = req.body
   try {
-    const delivery = await liveDeliveryModel.findOne({ driverId: driverId })
+    const delivery = await liveDeliveryModel.findOne({ _id: deliveryId })
 
     if(delivery) {
       return res
