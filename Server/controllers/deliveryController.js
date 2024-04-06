@@ -112,11 +112,12 @@ const joinWaitList = asyncHandler(async (req, res) => {
             return res.status(400).json({ message: 'Bad request', status: 400 })
         }
 
-        bid.currentWaitList.append({
+        bid.currentWaitList.push({
             userId, date: currentDate
         })
 
-        await bid.save()
+        const updatedBid = await bid.save()
+        console.log('UpdatedBid', updatedBid)
 
         return res.status(200).json({ message: 'Added to waiting list', status: 200 })
         

@@ -6,6 +6,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
     const [bids, setBids] = useState([])
 
     const [message, setMessage] = useState('')
+    const [isLowerBid, setIsLowerBid] = useState({ status: false })
+    const [lowerAmount, setLowerAmount] = useState({})
 
     const formatDateTime = (dateTime) => {
         const date = new Date(dateTime)
@@ -65,7 +67,7 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
         }
     }
 
-    const lowerBid = async (deliveryId) => {
+    const lowerBid = async () => {
         const response = await fetch(
             "http://localhost:5001/api/delivery/lowerbid",
             {
@@ -76,8 +78,8 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 },
                 body: JSON.stringify({
                     userId: localStorage.getItem("userId"),
-                    deliveryId,
-                    lowerAmount: 0,
+                    deliveryId: lowerAmount.id,
+                    lowerAmount: lowerAmount.amount,
                 }),
             }
         )
@@ -126,6 +128,17 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                 <div className='locations'>Locations</div>
             </div>
             <div className='driver-bid-container'>
+                <p className='driver-bid-message'>{message}</p>
+                {isLowerBid.status && <div className='lower-amount'>
+                    <div>
+                        <label htmlFor="lower-amount">Enter the lower amount: </label>
+                        <input type="number" required value={lowerAmount.amount} onChange={(e) => setLowerAmount({ id: isLowerBid.id, amount: e.target.value })} />
+                    </div>
+                    <div>
+                        <button onClick={() => setIsLowerBid({ status: false })}>Cancel</button>
+                        <button onClick={() => lowerBid()}>Submit</button>
+                    </div>
+                </div>}
                 {bids.length !== 0 &&
                     <div className='driver-bid-header'>
                         <p>Name</p>
@@ -144,11 +157,12 @@ const Overview = ({ totaldriver, totalcustomer, ongoingfleet }) => {
                             <p>{value.currentBiddingPrice}</p>
                             <p>{formatDateTime(value.bidEndDate)}</p>
                             <button onClick={() => joinWaitList(value._id)}>Join Wait-List</button>
-                            <button onClick={() => lowerBid(value._id)}>Lower bid</button>
+                            <button onClick={() => setIsLowerBid({ status: true, id: value._id })}>Lower bid</button>
                         </div>)
                     })}
                 </div>
             </div>
+
 
 
         </div>

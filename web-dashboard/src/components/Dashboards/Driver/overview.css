@@ -102,3 +102,10 @@ p {
 .driver-bid button {
     width: max-content;
 }
+
+.driver-bid-message {
+    color: #4a4a4a;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
