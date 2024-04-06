@@ -1,13 +1,10 @@
 // export default MapContainer;
 import React, { useState, useEffect } from 'react';
 
-const GetPlaceName = () => {
+const GetPlaceName = ({ latitude, longitude }) => {
   const [placeName, setPlaceName] = useState('');
 
   useEffect(() => {
-
-    const latitude = 12.917
-    const longitude = 74.856; 
 
     // Load the Google Maps JavaScript API script
     const script = document.createElement('script');
@@ -37,14 +34,12 @@ const GetPlaceName = () => {
     // Clean up function to remove the script when the component unmounts
     return () => {
       document.body.removeChild(script);
-    };
-  }, []);
+    }
+  }, [])
 
   return (
-    <div>
-      <p>Place Name: {placeName}</p>
-    </div>
-  );
-};
+    <span>{placeName}</span>
+  )
+}
 
 export default GetPlaceName;

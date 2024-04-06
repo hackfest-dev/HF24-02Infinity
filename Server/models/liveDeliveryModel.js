@@ -62,6 +62,10 @@ const liveDeliverySchema = mongoose.Schema(
     currentLocation: {
       type: String,
     },
+    status: {
+      type: String,
+      default: 'Your delivery is under progress'
+    },
   },
   {
     timestamps: true,

@@ -80,29 +80,19 @@ const getUserBasicDetails = asyncHandler(async (req, res) => {
 
     try {
         const { userId } = req.body
-        const driver = await User.findOne({ _id: userId }, { _v: 0, _id: 0 })
+        const user = await User.findOne({ _id: userId }, { _v: 0, _id: 0 })
 
-        if (driver == undefined || driver == null) {
+        if (user == undefined || user == null) {
             return res.status(401).json({ message: 'Unauthorized', status: 401 })
         }
 
-        if (driver.type !== 'driver') {
+        if (user.type !== 'user') {
             return res.status(403).json({ message: 'Access Denied', status: 403 })
         }
 
-        const admin = await User.find({ type: 'admin' }, { _id: 0, _v: 0 })
-        const deliveries = await LiveDelivery.find({ driverId: userId })
+        const delivery = await LiveDelivery.find({ userId: userId })
 
-        let customersList = [admin]
-        deliveries.forEach(async element => {
-            customersList.push(await User.findOne({ _id: element.userId }, { _id: 0, _v: 0 }))
-        })
-
-        const driversCount = await User.countDocuments({ type: 'driver' })
-        const customersCount = await User.countDocuments({ type: 'user' })
-        const fleetCount = await LiveDelivery.countDocuments({})
-
-        return res.status(200).json({ driver, customersList, customersCount, driversCount, fleetCount, status: 200 })
+        return res.status(200).json({ delivery, status: 200 })
 
     } catch (err) {
         console.error(err)
