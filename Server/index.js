@@ -15,6 +15,8 @@ app.use('/api/user', require('./routes/userRoutes'))
 
 app.use('/api/delivery', require('./routes/deliveryRoutes'))
 
+app.use('/api/notification', require('./routes/notificationsRoutes'))
+
 app.use('/', (req, res) => {
     res.status(400).json({ message: "Page Not found" })
 })
