@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './overview.css';
-import LineChart from './Charts';
 
 const Overview = ({ basicData }) => {
 

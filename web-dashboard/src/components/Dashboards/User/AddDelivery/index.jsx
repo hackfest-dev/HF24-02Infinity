@@ -13,6 +13,7 @@ const AddDelivery = () => {
     date: '',
     goodsDescription: '',
     image: null,
+    image2: null,
   })
 
   const [message, setMessage] = useState('')
@@ -51,6 +52,7 @@ const AddDelivery = () => {
           date: '',
           goodsDescription: '',
           image: null,
+          image2: null,
         })
       }, 3000)
     } else {
@@ -72,6 +74,20 @@ const AddDelivery = () => {
     }
   }
 
+  const handleImageInput2 = (e) => {
+    const imageFile = e.target.files[0]
+    if (imageFile) {
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        const imageURL = event.target.result;
+        setDeliveryData({ ...deliveryData, image2: imageURL })
+      }
+      reader.readAsDataURL(imageFile)
+    } else {
+      setDeliveryData({ ...deliveryData, image2: '' })
+    }
+  }
+
   return (
     <>
       <div className="add-delivery-container">
@@ -88,8 +104,12 @@ const AddDelivery = () => {
             <input type="date" id='date' onChange={(e) => setDeliveryData({ ...deliveryData, date: e.target.value })} required />
           </div>
           <textarea rows={5} cols={30} name="goodsDesription" value={deliveryData.goodsDesription} onChange={(e) => setDeliveryData({ ...deliveryData, goodsDesription: e.target.value })} placeholder='Enter description of goods' required />
+          <h4>Kindly Upload the images of goods before submitting</h4>
           <input type="file" id="image" name="image" accept="image/*" onChange={(e) => { handleImageInput(e) }} required />
           {deliveryData.image && <img src={deliveryData.image} alt="uploadedImage" width={100} height={100} />}
+          <h4>Enter the ESugama Certificate Here</h4>
+          <input type="file" id="image" name="image" accept="image/*" onChange={(e) => { handleImageInput2(e) }} required />
+          {deliveryData.image && <img src={deliveryData.image2} alt="uploadedImage" width={100} height={100} />}
           <p className='add-delivery-request-message'>{message}</p>
           <button className='add-delivery-request-button'>Submit</button>
         </form>

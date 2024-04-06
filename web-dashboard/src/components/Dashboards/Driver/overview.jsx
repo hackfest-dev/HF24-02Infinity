@@ -3,6 +3,7 @@ import './overview.css'
 
 import { LuRefreshCw } from "react-icons/lu"
 import MapComponent from './DirectionMap'
+import GetPlaceName from './maps'
 
 const Overview = ({ basicData }) => {
 
@@ -176,8 +177,14 @@ const Overview = ({ basicData }) => {
                     {bids.map((value, key) => {
                         return (<div className='driver-bid' key={key}>
                             <p><h3>Name</h3>{value.name}</p>
-                            <p><h3>Source Destination</h3>{value.source}</p>
-                            <p><h3>Final Destination</h3>{value.destination}</p>
+                            <div>
+                            <h3>Source Destination</h3>
+                            <GetPlaceName latitude={value.source.split(',')[0]} longitude={value.source.split(',')[1]} />
+                        </div>
+                        <div>
+                            <h3>Final Destination</h3>
+                            <GetPlaceName latitude={value.destination.split(',')[0]} longitude={value.destination.split(',')[1]} />
+                        </div>
                             <p><h3>Current Price</h3>{value.currentBiddingPrice}</p>
                             <p><h3>End Time</h3>{formatDateTime(value.bidEndDate)}</p>
                             <img src={value.image} alt="" width={50} height={50}/>

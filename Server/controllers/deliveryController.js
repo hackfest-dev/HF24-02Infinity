@@ -29,10 +29,20 @@ const calculateDistanceByRoad = async (lat1, lon1, lat2, lon2) => {
 
 const calculatePrice = (weight, height, width, distanceInKm) => {
     // Base price per kilometer (in rupees)
-    const basePricePerKm = 50
 
-    // Calculate volume (assuming height * width * 1 for simplicity)
-    const volume = height * width * 1 // Assuming depth is 1 for simplicity
+    if ( distanceInKm <= 50){
+        basePricePerKm = 100
+    }
+    else if (distanceInKm <=200){
+        basePricePerKm = 75
+    }
+    else if (distanceInKm <=500){
+        basePricePerKm = 50
+    }
+    else if (distanceInKm <=2000){
+        basePricePerKm = 40
+    }
+    const volume = height * width * 1 
 
     // Calculate price based on volume and weight
     const priceByVolume = volume * 50 // 5 rupees per unit volume
@@ -76,7 +86,7 @@ const newRequest = asyncHandler(async (req, res) => {
                     const driverId = request.currentWaitList[0].userId
                     await Notification.create({
                         userId: driverId,
-                        description: 'You have won the bidding of the shipment name: ' + this.name
+                        description: 'You have won the bidding of the shipment name: ' + request.name
                     })
 
                     await Notification.create({
