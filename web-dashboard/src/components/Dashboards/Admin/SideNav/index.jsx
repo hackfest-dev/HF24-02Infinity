@@ -37,7 +37,7 @@ const SideNav = () => {
           <p className='admin-side-nav-link'><FaRegAddressCard />Address</p>
           <p className='admin-side-nav-link'><VscHistory />History</p>
         </div>
-        <h4 className='admin-side-nav-container'>Logout</h4>
+        <Link to='/login' class='logout-admin'>LOGOUT</Link>
       </div >
     </>
   )

@@ -5,6 +5,8 @@ import { GrOverview } from "react-icons/gr"
 import { IoIosAlert } from "react-icons/io"
 import { FaLocationDot, FaClipboardUser } from "react-icons/fa6"
 
+import { Link } from 'react-router-dom'
+
 
 const SideNav = () => {
   return (
@@ -18,9 +20,9 @@ const SideNav = () => {
         </div>
         <div className='admin-side-nav-container'>
           <h4 className='admin-side-nav-heading'>Pages</h4>
-          <p className='admin-side-nav-link'><FaClipboardUser />Customer Details</p>  
+          <p className='admin-side-nav-link'><FaClipboardUser />Customer Details</p>
         </div>
-        <h4 className='admin-side-nav-container'>Logout</h4>
+        <Link to='/login' class='logout-driver'>LOGOUT</Link>
       </div >
     </>
   )

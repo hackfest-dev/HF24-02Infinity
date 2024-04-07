@@ -31,3 +31,11 @@
     text-decoration: none;
     color: inherit;
 }
+
+.logout-admin {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+}
