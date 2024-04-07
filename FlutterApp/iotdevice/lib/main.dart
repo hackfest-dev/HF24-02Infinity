@@ -33,13 +33,19 @@ class _IotDeviceState extends State<IotDevice> {
   var flag=0;
   var imagePath = "";
   var num = 0;
+  var averageSpeed = 0.0;
   var position1;
   var date;
+  var speedViolation;
+  var penalty=0.0;
   Placemark? place;
   @override
   void initState() {
     // getlocation();
-    Timer.periodic(Duration(seconds:1), (Timer timer) {
+    // Timer.periodic(const Duration(seconds:20), (Timer timer) {
+    //   request(position?.latitude??"",position?.longitude??"",averageSpeed,num,penalty,speedViolation);
+    // });
+    Timer.periodic(const Duration(seconds:1), (Timer timer) {
       getlocation();
     });
     ShakeDetector.autoStart(
@@ -73,8 +79,15 @@ class _IotDeviceState extends State<IotDevice> {
       setState(() {
         position = position1;
         date= DateTime.now();
+        averageSpeed = (position!.speed+averageSpeed)/2;
+        if(position!.speed>60)
+        {
+            penalty +=0.1;
+            speedViolation +=1;
+        }
         flag = 1;
-        request(position?.latitude??"",position?.longitude??"",position?.speed??"",num);
+        // request(position?.latitude??"",position?.longitude??"",averageSpeed,num,penalty);
+        num=0;
       });
     // _locationData = await location.getLocation();
   }
@@ -109,7 +122,8 @@ class _IotDeviceState extends State<IotDevice> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Testing images"),
+          backgroundColor:Colors.purple.shade300,
+          title: const Text("02INFINITY"),
         ),
         body:Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -135,14 +149,7 @@ class _IotDeviceState extends State<IotDevice> {
             //       },
             //       child: const Text("click Photo")),
             // ),
-            Text(
-              num.toString(),
-              style: const TextStyle(fontSize: 20, color: Colors.red),
-            ),
-            Text(
-              "${position?.latitude??""} ${position?.longitude??""}",
-              style: const TextStyle(fontSize: 20, color: Colors.red),
-            ),
+            Image.asset("assets/car.png"),
             // Center(
             //   child: TextButton(
             //       onPressed: () async{
@@ -156,8 +163,9 @@ class _IotDeviceState extends State<IotDevice> {
             // ),
             (flag==1)?Center(
               child: Text(
-                "lat:${position?.latitude}\nlong:${position?.longitude}\nspeed:${position?.speed.toStringAsFixed(1)}\ntime:${date}",
-                style: const TextStyle(fontSize: 20, color: Colors.red),
+                textAlign:TextAlign.center,
+                "disturbances:${num}\nlat:${position?.latitude}\nlong:${position?.longitude}\nspeed:${position?.speed.toStringAsFixed(1)}\ntime:${date}",
+                style: const TextStyle(fontSize: 20, color: Colors.black),
               ),
             ):Container(),
           ],
