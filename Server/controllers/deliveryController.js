@@ -77,8 +77,8 @@ const newRequest = asyncHandler(async (req, res) => {
 
                 if (request && request.currentWaitList.length === 0) {
                     const currentDate = new Date()
-                    const threeHoursLater = new Date(currentDate.getTime() + (3 * 60 * 1000))
-                    // const threeHoursLater = new Date(currentDate.getTime() + (60 * 1000))
+                    // const threeHoursLater = new Date(currentDate.getTime() + (3 * 60 * 1000))
+                    const threeHoursLater = new Date(currentDate.getTime() + (60 * 1000))
                     request.bidEndDate = threeHoursLater
                     request.save()
                     return
