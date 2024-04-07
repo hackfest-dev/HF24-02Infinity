@@ -2,15 +2,11 @@ import React from 'react'
 import './index.css'
 
 import { GrOverview } from "react-icons/gr"
-import { FaHistory } from "react-icons/fa"
 import { IoIosAlert } from "react-icons/io"
-import { FaUserGroup, FaLocationDot, FaRegAddressCard, FaClipboardUser } from "react-icons/fa6"
+import { FaLocationDot } from "react-icons/fa6"
 import { TbListDetails } from "react-icons/tb"
-import { ImSleepy2 } from "react-icons/im"
-import { RiEmotionNormalFill } from "react-icons/ri"
-import { BsSpeedometer } from "react-icons/bs"
-import { GiDistraction } from "react-icons/gi"
-import { VscHistory } from "react-icons/vsc"
+
+import { Link } from 'react-router-dom'
 
 const SideNav = () => {
   return (
@@ -25,6 +21,7 @@ const SideNav = () => {
           <h3 className='user-side-nav-heading'>Pages</h3>
           <p className='user-side-nav-link'><TbListDetails />Driver Details</p>
           <p className='user-side-nav-link'><FaLocationDot />Current Location</p>
+          <Link to='/login' class='logout-user'>LOGOUT</Link>
         </div>
       </div >
     </>
